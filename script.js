@@ -49,7 +49,7 @@ const typingElement = document.getElementById("typing");
 const words = [
     "Full Stack Developer",
     "Backend Developer",
-    "Java Developer"
+    "Developer"
 ];
 
 let wordIndex = 0;
