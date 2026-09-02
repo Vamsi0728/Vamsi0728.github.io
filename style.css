@@ -1,3 +1,4 @@
+```css
 /* =========================
    GLOBAL
 ========================= */
@@ -281,7 +282,9 @@ section {
 }
 
 
-/* HERO IMAGE */
+/* =========================
+   HERO IMAGE
+========================= */
 
 .hero-image {
     position: relative;
@@ -353,6 +356,7 @@ section {
     0%,100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-15px);
     }
@@ -380,6 +384,7 @@ section {
     0%,100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(6px);
     }
@@ -734,13 +739,6 @@ section {
 
 .timeline-content p {
     color: var(--muted);
-}
-
-.cgpa {
-    display: inline-flex;
-    gap: 8px;
-    margin-top: 20px;
-    color: var(--accent);
 }
 
 
@@ -1180,4 +1178,15 @@ section {
         display: none;
     }
 
+}
+```
+
+The only functional change is that this old CSS was removed:
+
+```css
+.cgpa {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 20px;
+    color: var(--accent);
 }
