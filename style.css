@@ -68,7 +68,7 @@ section {
     z-index: 1000;
     background: rgba(7, 11, 20, 0.7);
     backdrop-filter: blur(18px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navbar {
@@ -101,7 +101,7 @@ section {
 .nav-links a {
     color: var(--muted);
     font-size: 14px;
-    transition: .3s;
+    transition: 0.3s;
     position: relative;
 }
 
@@ -118,7 +118,7 @@ section {
     left: 0;
     bottom: -8px;
     background: var(--accent);
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .nav-links a:hover::after,
@@ -155,9 +155,10 @@ section {
     height: 550px;
     background: var(--accent-2);
     filter: blur(180px);
-    opacity: .15;
+    opacity: 0.15;
     top: -200px;
     left: -200px;
+    pointer-events: none;
 }
 
 .hero::after {
@@ -167,9 +168,10 @@ section {
     height: 500px;
     background: var(--accent);
     filter: blur(180px);
-    opacity: .1;
+    opacity: 0.1;
     bottom: -250px;
     right: -150px;
+    pointer-events: none;
 }
 
 .hero-content {
@@ -177,9 +179,10 @@ section {
     width: 100%;
     margin: auto;
     display: grid;
-    grid-template-columns: 1.1fr .9fr;
+    grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
     gap: 60px;
+    position: relative;
     z-index: 2;
 }
 
@@ -193,7 +196,7 @@ section {
 
 .hero h1 {
     font-size: clamp(50px, 7vw, 90px);
-    line-height: .95;
+    line-height: 0.95;
     letter-spacing: -5px;
     margin-bottom: 25px;
 }
@@ -234,7 +237,7 @@ section {
     gap: 10px;
     font-size: 14px;
     font-weight: 600;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .primary-btn {
@@ -244,7 +247,7 @@ section {
 
 .primary-btn:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 35px rgba(0,229,255,.25);
+    box-shadow: 0 12px 35px rgba(0, 229, 255, 0.25);
 }
 
 .secondary-btn {
@@ -272,7 +275,7 @@ section {
     border: 1px solid var(--border);
     border-radius: 50%;
     color: var(--muted);
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .social-links a:hover {
@@ -291,6 +294,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 420px;
 }
 
 .image-glow {
@@ -300,31 +304,50 @@ section {
     border-radius: 50%;
     background: var(--accent);
     filter: blur(100px);
-    opacity: .12;
+    opacity: 0.12;
+    pointer-events: none;
 }
 
 .image-container {
+    position: relative;
+    z-index: 2;
     width: 350px;
     height: 350px;
-    border-radius: 50%;
     padding: 5px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        var(--accent),
+        var(--accent-2)
+    );
     animation: float 5s ease-in-out infinite;
+    overflow: hidden;
 }
 
 .image-container img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     border-radius: 50%;
     border: 8px solid #070b14;
 }
 
+.profile-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
 .floating-card {
     position: absolute;
+    z-index: 5;
     padding: 13px 18px;
     border: 1px solid var(--border);
-    background: rgba(12,18,32,.8);
+    background: rgba(12, 18, 32, 0.8);
     backdrop-filter: blur(15px);
     border-radius: 12px;
     display: flex;
@@ -332,7 +355,7 @@ section {
     align-items: center;
     font-size: 13px;
     font-weight: 600;
-    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .floating-card i {
@@ -353,7 +376,8 @@ section {
 }
 
 @keyframes float {
-    0%,100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
 
@@ -381,7 +405,8 @@ section {
 }
 
 @keyframes bounce {
-    0%,100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
 
@@ -401,8 +426,9 @@ section {
     height: 4px;
     background: var(--accent);
     border-radius: 50%;
-    opacity: .4;
+    opacity: 0.4;
     animation: particle 8s linear infinite;
+    pointer-events: none;
 }
 
 .particles span:nth-child(1) {
@@ -494,7 +520,7 @@ section {
     max-width: 1200px;
     margin: auto;
     display: grid;
-    grid-template-columns: .8fr 1.2fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 80px;
     align-items: center;
 }
@@ -502,7 +528,11 @@ section {
 .about-image-box {
     height: 420px;
     border: 1px solid var(--border);
-    background: linear-gradient(145deg,#0e1727,#070b14);
+    background: linear-gradient(
+        145deg,
+        #0e1727,
+        #070b14
+    );
     border-radius: 25px;
     display: grid;
     place-items: center;
@@ -515,7 +545,7 @@ section {
     position: absolute;
     width: 250px;
     height: 250px;
-    border: 1px solid rgba(0,229,255,.3);
+    border: 1px solid rgba(0, 229, 255, 0.3);
     border-radius: 50%;
     animation: rotate 12s linear infinite;
 }
@@ -525,7 +555,7 @@ section {
     position: absolute;
     width: 350px;
     height: 350px;
-    border: 1px solid rgba(124,58,237,.2);
+    border: 1px solid rgba(124, 58, 237, 0.2);
     border-radius: 50%;
     animation: rotate 18s linear infinite reverse;
 }
@@ -594,7 +624,7 @@ section {
     max-width: 1300px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 18px;
 }
 
@@ -603,7 +633,7 @@ section {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 18px;
-    transition: .4s;
+    transition: 0.4s;
     position: relative;
     overflow: hidden;
 }
@@ -616,7 +646,7 @@ section {
     top: 0;
     left: 0;
     background: var(--accent);
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .skill-card:hover::before {
@@ -625,7 +655,7 @@ section {
 
 .skill-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(0,229,255,.3);
+    border-color: rgba(0, 229, 255, 0.3);
 }
 
 .skill-icon {
@@ -634,7 +664,7 @@ section {
     border-radius: 14px;
     display: grid;
     place-items: center;
-    background: rgba(0,229,255,.08);
+    background: rgba(0, 229, 255, 0.08);
     color: var(--accent);
     font-size: 25px;
     margin-bottom: 20px;
@@ -654,7 +684,7 @@ section {
 .skill-line {
     width: 100%;
     height: 3px;
-    background: rgba(255,255,255,.08);
+    background: rgba(255, 255, 255, 0.08);
     margin-top: 20px;
     border-radius: 10px;
     overflow: hidden;
@@ -719,7 +749,7 @@ section {
 .timeline-date {
     display: inline-block;
     padding: 7px 14px;
-    background: rgba(0,229,255,.08);
+    background: rgba(0, 229, 255, 0.08);
     color: var(--accent);
     border-radius: 50px;
     font-size: 12px;
@@ -759,15 +789,19 @@ section {
     padding: 40px;
     min-height: 480px;
     border: 1px solid var(--border);
-    background: linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.015)
+    );
     border-radius: 25px;
     overflow: hidden;
-    transition: .4s;
+    transition: 0.4s;
 }
 
 .project-card:hover {
     transform: translateY(-10px);
-    border-color: rgba(0,229,255,.35);
+    border-color: rgba(0, 229, 255, 0.35);
 }
 
 .project-card::before {
@@ -780,7 +814,7 @@ section {
     border-radius: 50%;
     background: var(--accent);
     filter: blur(80px);
-    opacity: .08;
+    opacity: 0.08;
 }
 
 .project-number {
@@ -789,7 +823,7 @@ section {
     top: 25px;
     font-size: 60px;
     font-weight: 800;
-    color: rgba(255,255,255,.04);
+    color: rgba(255, 255, 255, 0.04);
 }
 
 .project-icon {
@@ -798,7 +832,7 @@ section {
     display: grid;
     place-items: center;
     border-radius: 18px;
-    background: rgba(0,229,255,.08);
+    background: rgba(0, 229, 255, 0.08);
     color: var(--accent);
     font-size: 27px;
     margin-bottom: 30px;
@@ -832,7 +866,7 @@ section {
 .project-tech span {
     padding: 7px 12px;
     border-radius: 50px;
-    background: rgba(255,255,255,.05);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
     color: #c8d0dd;
     font-size: 11px;
@@ -845,7 +879,7 @@ section {
     color: var(--accent);
     font-size: 13px;
     margin-top: 30px;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .project-link:hover {
@@ -871,7 +905,7 @@ section {
     max-width: 1100px;
     margin: auto;
     display: grid;
-    grid-template-columns: .8fr 1.2fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 60px;
 }
 
@@ -897,7 +931,7 @@ section {
     display: grid;
     place-items: center;
     border-radius: 12px;
-    background: rgba(0,229,255,.08);
+    background: rgba(0, 229, 255, 0.08);
     color: var(--accent);
 }
 
@@ -945,19 +979,19 @@ section {
 .input-group textarea {
     width: 100%;
     padding: 14px 16px;
-    background: rgba(255,255,255,.04);
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border);
     outline: none;
     border-radius: 10px;
     color: white;
     resize: vertical;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .input-group input:focus,
 .input-group textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0,229,255,.05);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.05);
 }
 
 .send-btn {
@@ -1006,7 +1040,7 @@ section {
     place-items: center;
     border: 1px solid var(--border);
     border-radius: 50%;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .footer-social a:hover {
@@ -1017,7 +1051,7 @@ section {
 .copyright {
     margin-top: 35px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 
@@ -1038,7 +1072,7 @@ section {
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: .3s;
+    transition: 0.3s;
     z-index: 999;
 }
 
@@ -1071,7 +1105,7 @@ section {
 @media (max-width: 1000px) {
 
     .skills-grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .hero-content {
@@ -1090,11 +1124,17 @@ section {
 
     .hero-image {
         order: -1;
+        min-height: 330px;
     }
 
     .image-container {
         width: 280px;
         height: 280px;
+    }
+
+    .image-glow {
+        width: 300px;
+        height: 300px;
     }
 
     .about-container {
@@ -1108,7 +1148,6 @@ section {
     .contact-container {
         grid-template-columns: 1fr;
     }
-
 }
 
 
@@ -1129,7 +1168,7 @@ section {
         background: #090e19;
         border-bottom: 1px solid var(--border);
         transform: translateY(-150%);
-        transition: .4s;
+        transition: 0.4s;
     }
 
     .nav-links.show {
@@ -1151,6 +1190,20 @@ section {
 
     .hero h1 {
         letter-spacing: -3px;
+    }
+
+    .hero-image {
+        min-height: 300px;
+    }
+
+    .image-container {
+        width: 240px;
+        height: 240px;
+    }
+
+    .image-glow {
+        width: 250px;
+        height: 250px;
     }
 
     .skills-grid {
@@ -1177,16 +1230,5 @@ section {
     .floating-card {
         display: none;
     }
-
 }
 ```
-
-The only functional change is that this old CSS was removed:
-
-```css
-.cgpa {
-    display: inline-flex;
-    gap: 8px;
-    margin-top: 20px;
-    color: var(--accent);
-}
