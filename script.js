@@ -3,41 +3,53 @@
 ========================= */
 
 const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.querySelector(".nav-links");
+const navLinks = document.getElementById("navLinks");
 
-menuBtn.addEventListener("click", () => {
+if (menuBtn && navLinks) {
 
-    navLinks.classList.toggle("show");
+    menuBtn.addEventListener("click", () => {
 
-    const icon = menuBtn.querySelector("i");
-
-    if (navLinks.classList.contains("show")) {
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-xmark");
-    } else {
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
-    }
-
-});
-
-
-/* Close mobile menu */
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        navLinks.classList.remove("show");
+        navLinks.classList.toggle("show");
 
         const icon = menuBtn.querySelector("i");
 
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
+        if (icon) {
+            if (navLinks.classList.contains("show")) {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+                menuBtn.setAttribute("aria-label", "Close Menu");
+            } else {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+                menuBtn.setAttribute("aria-label", "Open Menu");
+            }
+        }
 
     });
 
-});
+
+    /* Close mobile menu */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navLinks.classList.remove("show");
+
+            const icon = menuBtn.querySelector("i");
+
+            if (icon) {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+            }
+
+            menuBtn.setAttribute("aria-label", "Open Menu");
+
+        });
+
+    });
+
+}
 
 
 /* =========================
@@ -49,7 +61,7 @@ const typingElement = document.getElementById("typing");
 const words = [
     "Full Stack Developer",
     "Backend Developer",
-    "Developer"
+    "Java Developer"
 ];
 
 let wordIndex = 0;
@@ -59,7 +71,14 @@ let deleting = false;
 
 function typeEffect() {
 
+    if (!typingElement) {
+        return;
+    }
+
     const currentWord = words[wordIndex];
+
+
+    /* Typing */
 
     if (!deleting) {
 
@@ -77,7 +96,12 @@ function typeEffect() {
             return;
         }
 
-    } else {
+    }
+
+
+    /* Deleting */
+
+    else {
 
         typingElement.textContent =
             currentWord.substring(0, charIndex - 1);
@@ -98,6 +122,7 @@ function typeEffect() {
 
     }
 
+
     setTimeout(
         typeEffect,
         deleting ? 50 : 100
@@ -116,37 +141,39 @@ const revealElements =
     document.querySelectorAll(".reveal");
 
 
-const observer =
-    new IntersectionObserver(
+if ("IntersectionObserver" in window) {
 
-        (entries) => {
+    const observer =
+        new IntersectionObserver(
 
-            entries.forEach(entry => {
+            (entries) => {
 
-                if (entry.isIntersecting) {
+                entries.forEach(entry => {
 
-                    entry.target.classList.add("show");
+                    if (entry.isIntersecting) {
 
-                    observer.unobserve(entry.target);
+                        entry.target.classList.add("show");
 
-                }
+                        observer.unobserve(entry.target);
 
-            });
+                    }
 
-        },
+                });
 
-        {
-            threshold: 0.15
-        }
+            },
 
-    );
+            {
+                threshold: 0.15
+            }
+
+        );
 
 
-revealElements.forEach(element => {
+    revealElements.forEach(element => {
+        observer.observe(element);
+    });
 
-    observer.observe(element);
-
-});
+}
 
 
 /* =========================
@@ -160,18 +187,19 @@ const navItems =
     document.querySelectorAll(".nav-links a");
 
 
-window.addEventListener("scroll", () => {
+function updateActiveNavigation() {
 
     let current = "";
 
     sections.forEach(section => {
 
         const sectionTop =
-            section.offsetTop - 150;
+            section.offsetTop - 180;
 
         if (window.scrollY >= sectionTop) {
 
-            current = section.getAttribute("id");
+            current =
+                section.getAttribute("id");
 
         }
 
@@ -182,7 +210,10 @@ window.addEventListener("scroll", () => {
 
         item.classList.remove("active");
 
-        if (item.getAttribute("href") === `#${current}`) {
+        if (
+            item.getAttribute("href") ===
+            `#${current}`
+        ) {
 
             item.classList.add("active");
 
@@ -190,7 +221,13 @@ window.addEventListener("scroll", () => {
 
     });
 
-});
+}
+
+
+window.addEventListener(
+    "scroll",
+    updateActiveNavigation
+);
 
 
 /* =========================
@@ -201,29 +238,33 @@ const backToTop =
     document.getElementById("backToTop");
 
 
-window.addEventListener("scroll", () => {
+if (backToTop) {
 
-    if (window.scrollY > 500) {
+    window.addEventListener("scroll", () => {
 
-        backToTop.classList.add("show");
+        if (window.scrollY > 500) {
 
-    } else {
+            backToTop.classList.add("show");
 
-        backToTop.classList.remove("show");
+        } else {
 
-    }
+            backToTop.classList.remove("show");
 
-});
+        }
 
-
-backToTop.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
     });
 
-});
+
+    backToTop.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+}
 
 
 /* =========================
@@ -234,35 +275,43 @@ const contactForm =
     document.getElementById("contactForm");
 
 
-contactForm.addEventListener("submit", (event) => {
+if (contactForm) {
 
-    event.preventDefault();
+    contactForm.addEventListener(
+        "submit",
+        (event) => {
 
-    const name =
-        document.getElementById("name").value;
-
-    const email =
-        document.getElementById("email").value;
-
-    const subject =
-        document.getElementById("subject").value;
-
-    const message =
-        document.getElementById("message").value;
+            event.preventDefault();
 
 
-    const mailBody =
-        `Name: ${name}%0D%0A` +
-        `Email: ${email}%0D%0A%0D%0A` +
-        `${message}`;
+            const name =
+                document.getElementById("name").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const subject =
+                document.getElementById("subject").value.trim();
+
+            const message =
+                document.getElementById("message").value.trim();
 
 
-    const mailLink =
-        `mailto:imvamsi1128@gmail.com` +
-        `?subject=${encodeURIComponent(subject)}` +
-        `&body=${mailBody}`;
+            const mailBody =
+                `Name: ${name}\n` +
+                `Email: ${email}\n\n` +
+                `${message}`;
 
 
-    window.location.href = mailLink;
+            const mailLink =
+                `mailto:imvamsi1128@gmail.com` +
+                `?subject=${encodeURIComponent(subject)}` +
+                `&body=${encodeURIComponent(mailBody)}`;
 
-});
+
+            window.location.href = mailLink;
+
+        }
+    );
+
+}
